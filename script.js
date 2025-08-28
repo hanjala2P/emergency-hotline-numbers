@@ -1,15 +1,4 @@
-//  add to favorites btn 
 
-// document.getElementsByClassName("save").addEventListener('click',
-//     function(e){
-//         e.preventDefault()
-//         const favoriteList = parseInt(document.getElementById("count-fev").innerText)
-//         const totalFev =  favoriteList + 1
-//          document.getElementById("count-fev").innerText = totalFev
-
-
-//     }
-// )
 const saveBtns = document.getElementsByClassName("fa-regular");
 
 for (let i = 0; i < saveBtns.length; i++) {
@@ -22,253 +11,67 @@ for (let i = 0; i < saveBtns.length; i++) {
     });
 }
 
-// // row 3 end
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
 
-// copy list use id ()
-document.getElementById("copy1-1").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
+    // count update
+    let counter = document.getElementById("count-copy");
+    counter.innerText = parseInt(counter.innerText) + 1;
 
-
+    // phone number copy
+    let phoneEl = btn.closest(".cart-body").querySelector(".phoneNumber");
+    if (phoneEl) {
+      let number = phoneEl.innerText.trim();
+      navigator.clipboard.writeText(number);
+      alert("✔ Copied: " + number);
     }
-)
-document.getElementById("copy1-2").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-document.getElementById("copy1-3").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-document.getElementById("copy2-1").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-document.getElementById("copy2-2").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-document.getElementById("copy2-3").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-document.getElementById("copy3-1").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-document.getElementById("copy3-2").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-document.getElementById("copy3-3").addEventListener('click',
-    function(e){
-        e.preventDefault()
-        const copyList = parseInt(document.getElementById("count-copy").innerText)
-        const totalCopy =  copyList + 1
-         document.getElementById("count-copy").innerText = totalCopy
-
-
-    }
-)
-// copy data
-
-
-// copy element list end here
+  });
+});
 
 
 
 // coin count
 
 
-document.querySelectorAll(".call-btn").forEach(btn => {
-    btn.addEventListener("click", e => {
-        e.preventDefault();
+// all buttons
+const buttons = document.querySelectorAll(".call-btn");
+// all history blocks 
+const historyBlocks = document.querySelectorAll(".cal-details");
 
-        let coinEl = document.getElementById("count-coin");
-        let currentCoin = parseInt(coinEl.innerText);
-        let newCoin = currentCoin - 20;
+buttons.forEach((btn, index) => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
 
-        if (newCoin >= 0) {
-            coinEl.innerText = newCoin;
-            alert("✔ " + btn.dataset.msg);
-        } else {
-            coinEl.innerText = 0;
-            alert("❌ You don't have enough coin. You need minimum 20 coin for each call.");
-        }
-    });
+    let coinEl = document.getElementById("count-coin");
+    let currentCoin = parseInt(coinEl.innerText);
+    let newCoin = currentCoin - 20;
+
+    if (newCoin >= 0) {
+      coinEl.innerText = newCoin;
+      alert("✔ " + btn.dataset.msg);
+
+     
+      if (historyBlocks[index]) {
+        historyBlocks[index].style.display = "block";
+
+        // call korar somoy time add hobe
+        let clock = historyBlocks[index].querySelector(".clock");
+        clock.innerText = new Date().toLocaleTimeString();
+      }
+
+    } else {
+      coinEl.innerText = 0;
+      alert("❌ You don't have enough coin. You need minimum 20 coin for each call.");
+    }
+  });
 });
 
-// document.getElementById("call1-1").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling National Emergency Number")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
+// clear history button 
+document.querySelector(".call-history-head .btn").addEventListener("click", () => {
+  historyBlocks.forEach(block => block.style.display = "none");
+});
 
-// })
-// document.getElementById("call1-2").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Police Helpline Number")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
-// document.getElementById("call1-3").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Fire Service Number")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
-// document.getElementById("call2-1").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Ambulance Service")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
-// document.getElementById("call2-2").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Women & Child Helpline")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
-// document.getElementById("call2-3").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Anti-Corruption Helpline")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
-// document.getElementById("call3-1").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Electricity Helpline")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
-// document.getElementById("call3-2").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Brac Helpline")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
-// document.getElementById("call3-3").addEventListener('click', function(e){
-//     e.preventDefault()
-//     const callList = parseInt(document.getElementById("count-coin").innerText)
-//         const callPrice =  callList - 20 
-//         document.getElementById("count-coin").innerText = callPrice
-//     if( callPrice >=0 ){
-//         alert("✔ Calling Brac Helpline")
-//     }
-//     else{
-//         document.getElementById("count-coin").innerText = 0
-//         alert( " ❌ You don't have enough coin You have need 20 coin minimum for each call")
-//     }
-
-// })
 
 // time 
   function updateClock() {
@@ -289,12 +92,4 @@ document.querySelectorAll(".call-btn").forEach(btn => {
 
 
 
-    // copy
-
-    // document.getElementsByClassName("call").addEventListener('click', function (e){
-    //     e.preventDefault()
-    //      const callHistoryList = document.getElementById("cal-details").style.
-    //     callHistoryList = 
-    // })
-
-    
+   

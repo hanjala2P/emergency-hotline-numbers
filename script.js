@@ -55,9 +55,14 @@ buttons.forEach((btn, index) => {
       if (historyBlocks[index]) {
         historyBlocks[index].style.display = "block";
 
-        // call korar somoy time add hobe
+        // when calling add time in history
         let clock = historyBlocks[index].querySelector(".clock");
-        clock.innerText = new Date().toLocaleTimeString();
+        clock.innerText = new Date().toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      });
+
       }
 
     } else {
@@ -71,24 +76,6 @@ buttons.forEach((btn, index) => {
 document.querySelector(".call-history-head .btn").addEventListener("click", () => {
   historyBlocks.forEach(block => block.style.display = "none");
 });
-
-
-// time 
-  function updateClock() {
-      let now = new Date();
-      let time = now.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-      });
-
-      document.querySelectorAll(".clock").forEach(clock => {
-        clock.innerText = time;
-      });
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock();
 
 
 
